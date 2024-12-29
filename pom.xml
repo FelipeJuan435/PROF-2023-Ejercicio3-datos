@@ -13,6 +13,20 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
@@ -28,7 +42,6 @@
 			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -48,6 +61,26 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
+			</plugin>
+
+			<!-- Plugin test smell -->
+			<plugin>
+				<groupId>com.github.FelipeJuan435</groupId>
+				<artifactId>testSmellPlugin</artifactId>
+				<version>1.0.4</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>detect-smells</goal>
+						</goals>
+						<configuration>
+							<jarPath>${project.basedir}/TestSmellDetector.jar</jarPath>
+							<inputCsvPath>${project.build.directory}/testSmellsInput.csv</inputCsvPath>
+							<testPath>${project.basedir}/src/test/java/es/upm/grise/prof/curso2023/ejercicio3/SUTTest.java</testPath>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
